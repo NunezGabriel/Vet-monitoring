@@ -23,6 +23,7 @@ const Paciente = () => {
       <p className="font-bold text-gray-700 uppercase">
         Sintomas:
         <span className="font-normal normal-case">
+          {" "}
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
           temporibus iure nemo, reprehenderit molestias ut! Architecto earum
           eaque consequuntur expedita quam odit nostrum nam odio, ea, sed libero
