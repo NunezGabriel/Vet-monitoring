@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const PacienteForm = () => {
+const PacienteForm = ({ setPacientes, pacientes }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -21,6 +21,24 @@ const PacienteForm = () => {
       setError(false);
     }
     /////////////////////////////////////
+    //objeto de paciente
+    const objetoPaciente = {
+      //no es necesario poner key y value solo basta con el key ya que si el key va a tener el mismo valor que el value por las nuevas feaatures de js se puede poner asi, te ahorras text :)
+      nombre, // normalmente iria asi-> nombre: nombre;
+      propietario,
+      email,
+      alta,
+      sintomas,
+    };
+    //agregando datos del form al state
+    setPacientes([...pacientes, objetoPaciente]); //hacemos esto prq si solo agregamos objeto paciente se va a reescribir cada vez que agregarmso un paciente nuevo pero con esto hacemos una copia de lo que habia antes en el array y agregamos un nuevo paciente :)
+
+    //reiniciando el form
+    setNombre("");
+    setPropietario("");
+    setEmail("");
+    setAlta("");
+    setSintomas("");
   };
   return (
     <div className="p-8 flex flex-col gap-6">
