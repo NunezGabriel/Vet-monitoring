@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import ErrorComponent from "./error";
 
 const PacienteForm = ({ setPacientes, pacientes }) => {
   const [nombre, setNombre] = useState("");
@@ -21,6 +22,13 @@ const PacienteForm = ({ setPacientes, pacientes }) => {
       setError(false);
     }
     /////////////////////////////////////
+    const generarID = () => {
+      const random = Math.random().toString(36);
+      const fecha = Date.now().toString(36);
+
+      return random + fecha;
+    };
+    /////////////////////////////////////
     //objeto de paciente
     const objetoPaciente = {
       //no es necesario poner key y value solo basta con el key ya que si el key va a tener el mismo valor que el value por las nuevas feaatures de js se puede poner asi, te ahorras text :)
@@ -29,6 +37,7 @@ const PacienteForm = ({ setPacientes, pacientes }) => {
       email,
       alta,
       sintomas,
+      id: generarID(),
     };
     //agregando datos del form al state
     setPacientes([...pacientes, objetoPaciente]); //hacemos esto prq si solo agregamos objeto paciente se va a reescribir cada vez que agregarmso un paciente nuevo pero con esto hacemos una copia de lo que habia antes en el array y agregamos un nuevo paciente :)
@@ -50,11 +59,12 @@ const PacienteForm = ({ setPacientes, pacientes }) => {
         onSubmit={handleSubmit}
         className="flex flex-col gap-8 bg-white shadow-md rounded-lg py-10 px-5"
       >
-        {
-          error && (
-            <div className="text-red-600">* ERROR llena todos los campos</div>
-          ) /*Ponemoos doble && para decir si error es tru pasa eso, asi nos evitamos poner un caso false */
-        }
+        {error && (
+          <ErrorComponent>
+            <p>* ERROR llena todos los campos</p>
+          </ErrorComponent>
+        )}
+
         <div className="flex flex-col gap-1">
           <label
             htmlFor="first-input"
