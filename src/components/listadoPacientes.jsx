@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import Paciente from "./paciente";
 
-const ListadoPacientes = ({ pacientes }) => {
+const ListadoPacientes = ({ pacientes, setPaciente }) => {
   return (
     <>
       {pacientes.length == 0 ? (
@@ -21,7 +22,7 @@ const ListadoPacientes = ({ pacientes }) => {
             <span className="text-indigo-600"> Pacientes y Citas</span>
           </h5>
           {pacientes.map((e) => {
-            return <Paciente key={e.id} e={e} />;
+            return <Paciente key={e.id} e={e} setPaciente={setPaciente} />;
           })}
         </div>
       )}

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import ErrorComponent from "./error";
 
-const PacienteForm = ({ setPacientes, pacientes }) => {
+const PacienteForm = ({ setPacientes, pacientes, paciente }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -10,6 +10,17 @@ const PacienteForm = ({ setPacientes, pacientes }) => {
   const [sintomas, setSintomas] = useState("");
 
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(paciente).length > 0) {
+      //Object.keys() => es la forma de ver las llaves de un objeto y asi aplicar la logica para lo que querramos en este caso veo si el objeto esta lleno
+      setNombre(paciente.nombre);
+      setPropietario(paciente.propietario);
+      setEmail(paciente.email);
+      setAlta(paciente.alta);
+      setSintomas(paciente.sintomas);
+    }
+  }, [paciente]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -152,7 +163,7 @@ const PacienteForm = ({ setPacientes, pacientes }) => {
         </div>
         <input
           type="submit"
-          className="bg-indigo-600 hover:bg-indigo-700 transition-colors w-full p-3 text-white uppercase font-bold cursor-pointer"
+          className="bg-indigo-600 hover:bg-indigo-700 transition-colors w-full p-3 text-white uppercase font-bold cursor-pointer rounded-lg"
           value="agregar paciente"
         />
       </form>

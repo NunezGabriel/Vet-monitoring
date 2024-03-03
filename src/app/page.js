@@ -6,13 +6,17 @@ import { useState } from "react";
 
 export default function Home() {
   const [pacientes, setPacientes] = useState([]);
-
+  const [paciente, setPaciente] = useState({});
   return (
     <>
       <HeaderComponent />
       <section className="mt-10 flex flex-col gap-8 md:flex-row max-w-[1000px] mx-auto md:justify-between">
-        <PacienteForm setPacientes={setPacientes} pacientes={pacientes} />
-        <ListadoPacientes pacientes={pacientes} />
+        <PacienteForm
+          setPacientes={setPacientes}
+          pacientes={pacientes}
+          paciente={paciente}
+        />
+        <ListadoPacientes pacientes={pacientes} setPaciente={setPaciente} />
       </section>
     </>
   );
