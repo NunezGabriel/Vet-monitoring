@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import ErrorComponent from "./error";
 
-const PacienteForm = ({ setPacientes, pacientes, paciente }) => {
+const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -48,10 +48,21 @@ const PacienteForm = ({ setPacientes, pacientes, paciente }) => {
       email,
       alta,
       sintomas,
-      id: generarID(),
     };
-    //agregando datos del form al state
-    setPacientes([...pacientes, objetoPaciente]); //hacemos esto prq si solo agregamos objeto paciente se va a reescribir cada vez que agregarmso un paciente nuevo pero con esto hacemos una copia de lo que habia antes en el array y agregamos un nuevo paciente :)
+
+    if (paciente.id) {
+      //editando el registro
+      objetoPaciente.id = paciente.id;
+      const pacientesActualizados = pacientes.map((pacienteState) =>
+        pacienteState.id === paciente.id ? objetoPaciente : pacienteState
+      );
+      setPacientes(pacientesActualizados);
+      setPaciente({});
+    } else {
+      //Nuevo registro
+      objetoPaciente.id = generarID();
+      setPacientes([...pacientes, objetoPaciente]);
+    }
 
     //reiniciando el form
     setNombre("");

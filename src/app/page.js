@@ -2,11 +2,24 @@
 import ListadoPacientes from "@/components/listadoPacientes";
 import PacienteForm from "@/components/Form";
 import HeaderComponent from "@/components/header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
-  const [pacientes, setPacientes] = useState([]);
+  const [pacientes, setPacientes] = useState(
+    JSON.parse(localStorage.getItem("pacientes")) ?? []
+  );
   const [paciente, setPaciente] = useState({});
+
+  useEffect(() => {
+    localStorage.setItem("pacientes", JSON.stringify(pacientes));
+  }, [pacientes]);
+
+  const eliminarPaciente = (id) => {
+    const pacientesActualizados = pacientes.filter(
+      (paciente) => paciente.id !== id
+    );
+    setPacientes(pacientesActualizados);
+  };
   return (
     <>
       <HeaderComponent />
@@ -15,8 +28,13 @@ export default function Home() {
           setPacientes={setPacientes}
           pacientes={pacientes}
           paciente={paciente}
+          setPaciente={setPaciente}
         />
-        <ListadoPacientes pacientes={pacientes} setPaciente={setPaciente} />
+        <ListadoPacientes
+          pacientes={pacientes}
+          eliminarPaciente={eliminarPaciente}
+          setPaciente={setPaciente}
+        />
       </section>
     </>
   );
