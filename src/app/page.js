@@ -9,17 +9,14 @@ export default function Home() {
   //Darkmode
   const [theme, setTheme] = useState(false);
   //////////
-  const [paciente, setPaciente] = useState({});
+
   const [pacientes, setPacientes] = useState(
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("pacientes")) ?? []
-      : null
+    JSON.parse(localStorage.getItem("pacientes")) ?? []
   );
+  const [paciente, setPaciente] = useState({});
 
   useEffect(() => {
-    typeof window !== "undefined"
-      ? localStorage.setItem("pacientes", JSON.stringify(pacientes))
-      : undefined;
+    localStorage.setItem("pacientes", JSON.stringify(pacientes));
   }, [pacientes]);
 
   const eliminarPaciente = (id) => {
