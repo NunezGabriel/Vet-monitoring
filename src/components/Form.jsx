@@ -2,7 +2,13 @@
 import { useEffect, useState } from "react";
 import ErrorComponent from "./error";
 
-const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
+const PacienteForm = ({
+  setPacientes,
+  pacientes,
+  paciente,
+  setPaciente,
+  theme,
+}) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -75,11 +81,17 @@ const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
     <div className="p-8 flex flex-col gap-6">
       <h1 className="text-xl font-black text-center">Seguimiento Pacientes</h1>
       <h5 className="text-sm text-center">
-        Añade Pacientes y<span className="text-indigo-600"> Administralos</span>
+        Añade Pacientes y
+        <span className={`${theme ? "darBgGreenText" : "text-indigo-600"}`}>
+          {" "}
+          Administralos
+        </span>
       </h5>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-8 bg-white shadow-md rounded-lg py-10 px-5"
+        className={`${
+          theme ? "darBgSoft" : "lightBgSoft"
+        } flex flex-col gap-8 shadow-md rounded-lg py-10 px-5`}
       >
         {error && (
           <ErrorComponent>
@@ -87,16 +99,20 @@ const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
           </ErrorComponent>
         )}
 
-        <div className="flex flex-col gap-1">
+        <div className={`flex flex-col gap-1 `}>
           <label
             htmlFor="first-input"
-            className="text-gray-700 font-bold uppercase"
+            className={`${
+              theme ? "darkBgText " : "lightBgText"
+            } font-bold uppercase`}
           >
             Nombre mascota
           </label>
           <input
             id="first-input"
-            className="border-2 w-full p-2 placeholder-gray-400 rounded-md"
+            className={`${
+              theme ? "darBgSoft borderGreen" : "lightBgSoft"
+            } border-2 w-full p-2 placeholder-gray-400 rounded-md`}
             type="text"
             placeholder="Nombre de la Mascota"
             value={nombre}
@@ -109,13 +125,17 @@ const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
         <div className="flex flex-col gap-1">
           <label
             htmlFor="second-input"
-            className="text-gray-700 font-bold uppercase"
+            className={`${
+              theme ? "darkBgText " : "lightBgText"
+            } font-bold uppercase`}
           >
             Nombre Propietario
           </label>
           <input
             id="second-input"
-            className="border-2 w-full p-2 placeholder-gray-400 rounded-md"
+            className={`${
+              theme ? "darBgSoft borderGreen" : "lightBgSoft"
+            } border-2 w-full p-2 placeholder-gray-400 rounded-md`}
             type="text"
             placeholder="Nombre del Propietario"
             value={propietario}
@@ -124,13 +144,21 @@ const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
             }}
           />
         </div>
+
         <div className="flex flex-col gap-1">
-          <label htmlFor="email" className="text-gray-700 font-bold uppercase">
+          <label
+            htmlFor="email"
+            className={`${
+              theme ? "darkBgText " : "lightBgText"
+            } font-bold uppercase`}
+          >
             email
           </label>
           <input
             id="email"
-            className="border-2 w-full p-2 placeholder-gray-400 rounded-md"
+            className={`${
+              theme ? "darBgSoft borderGreen" : "lightBgSoft"
+            } border-2 w-full p-2 placeholder-gray-400 rounded-md`}
             type="email"
             placeholder="user@email.com"
             value={email}
@@ -139,13 +167,21 @@ const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
             }}
           />
         </div>
+
         <div className="flex flex-col gap-1">
-          <label htmlFor="alta" className="text-gray-700 font-bold uppercase">
+          <label
+            htmlFor="alta"
+            className={`${
+              theme ? "darkBgText " : "lightBgText"
+            } font-bold uppercase`}
+          >
             alta
           </label>
           <input
             id="alta"
-            className="border-2 w-full p-2 placeholder-gray-400 rounded-md"
+            className={`${
+              theme ? "darBgSoft borderGreen" : "lightBgSoft"
+            } border-2 w-full p-2 text-gray-400 rounded-md`}
             type="date"
             value={alta}
             onChange={(e) => {
@@ -153,15 +189,20 @@ const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
             }}
           />
         </div>
+
         <div className="flex flex-col gap-1">
           <label
             htmlFor="sintomas"
-            className="text-gray-700 font-bold uppercase"
+            className={`${
+              theme ? "darkBgText " : "lightBgText"
+            } font-bold uppercase`}
           >
             Sintomas
           </label>
           <textarea
-            className="border-2 w-full p-2 placeholder-gray-400 rounded-md"
+            className={`${
+              theme ? "darBgSoft borderGreen" : "lightBgSoft"
+            } border-2 w-full p-2 placeholder-gray-400 rounded-md`}
             id="sintomas"
             placeholder="Describe los Sintomas"
             cols="30"
@@ -172,9 +213,14 @@ const PacienteForm = ({ setPacientes, pacientes, paciente, setPaciente }) => {
             }}
           ></textarea>
         </div>
+
         <input
           type="submit"
-          className="bg-indigo-600 hover:bg-indigo-700 transition-colors w-full p-3 text-white uppercase font-bold cursor-pointer rounded-lg"
+          className={`${
+            theme
+              ? "darBgGreen lightBgText hover:bg-green-600"
+              : "bg-indigo-600 hover:bg-indigo-700 text-white"
+          }  transition-colors w-full p-3 uppercase font-bold cursor-pointer rounded-lg`}
           value={paciente.id ? "Editar Paciente" : "Agregar  Paciente"}
         />
       </form>

@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import Paciente from "./paciente";
 
-const ListadoPacientes = ({ pacientes, setPaciente, eliminarPaciente }) => {
+const ListadoPacientes = ({
+  pacientes,
+  setPaciente,
+  eliminarPaciente,
+  theme,
+}) => {
   return (
     <>
       {pacientes.length == 0 ? (
@@ -9,7 +14,10 @@ const ListadoPacientes = ({ pacientes, setPaciente, eliminarPaciente }) => {
           <h1 className="text-xl font-black text-center">No Hay Pacientes </h1>
           <h5 className="text-sm text-center">
             Comienza agregando pacientes
-            <span className="text-indigo-600"> y apareceran en este lugar</span>
+            <span className={`${theme ? "darBgGreenText" : "text-indigo-600"}`}>
+              {" "}
+              y apareceran en este lugar
+            </span>
           </h5>
         </div>
       ) : (
@@ -19,7 +27,10 @@ const ListadoPacientes = ({ pacientes, setPaciente, eliminarPaciente }) => {
           </h1>
           <h5 className="text-sm text-center">
             Administra tus
-            <span className="text-indigo-600"> Pacientes y Citas</span>
+            <span className={`${theme ? "darBgGreenText" : "text-indigo-600"}`}>
+              {" "}
+              Pacientes y Citas
+            </span>
           </h5>
           {pacientes.map((e) => {
             return (
@@ -28,6 +39,7 @@ const ListadoPacientes = ({ pacientes, setPaciente, eliminarPaciente }) => {
                 e={e}
                 setPaciente={setPaciente}
                 eliminarPaciente={eliminarPaciente}
+                theme={theme}
               />
             );
           })}
