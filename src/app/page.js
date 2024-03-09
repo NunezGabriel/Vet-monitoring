@@ -11,20 +11,25 @@ export default function Home() {
   //////////
 
   const [pacientes, setPacientes] = useState(
-    JSON.parse(localStorage.getItem("pacientes")) ?? []
+    // JSON.parse(localStorage.getItem("pacientes")) ?? []
+    []
   );
   const [paciente, setPaciente] = useState({});
 
-  useEffect(() => {
-    localStorage.setItem("pacientes", JSON.stringify(pacientes));
-  }, [pacientes]);
+  //Ese codigo comentao junto conelcopdigo comment del useState de arrrba es de local storage y como es nextJS y no react con vite no se puede deployar con local storage asi que lo comento y lo deployo asi nomas no se gurada en ningun lado, ccuando puedas creale un backend sencillo usando la tecnoologia que  quieras en donde puedas almacenar las cartas de paciente asi la app esta completa al 100%
 
+  ///////////////////////////////////////////////////////////////////////////
+  // useEffect(() => {
+  //   localStorage.setItem("pacientes", JSON.stringify(pacientes));
+  // }, [pacientes]);
+  ///////////////////////////////////////////////////////////////////////////
   const eliminarPaciente = (id) => {
     const pacientesActualizados = pacientes.filter(
       (paciente) => paciente.id !== id
     );
     setPacientes(pacientesActualizados);
   };
+
   return (
     <div
       className={`py-10 ${theme ? "darBg darBgText" : "lightBg lightBgText"} `}
